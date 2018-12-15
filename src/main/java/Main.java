@@ -1,3 +1,4 @@
+import common.ApplicationConstants;
 import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
@@ -9,7 +10,7 @@ import rest.AccountWebResource;
 import rest.TransactionWebResource;
 
 public class Main {
-    private static Server server;
+    public static Server server;
 
     public static void main(String[] args) throws Exception {
         initServer();
@@ -21,14 +22,14 @@ public class Main {
         }
     }
 
-    private static void initServer(){
+    public static void initServer(){
         if(server == null){
             synchronized (Main.class) {
                 if(server == null) {
                     QueuedThreadPool threadPool = new QueuedThreadPool(100, 10, 120);
                     server = new Server(threadPool);
                     ServerConnector connector = new ServerConnector(server);
-                    connector.setPort(8090);
+                    connector.setPort(ApplicationConstants.WEB_APPLICATION_PORT);
                     server.setConnectors(new Connector[] { connector });
                     ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
                     context.setContextPath("/");

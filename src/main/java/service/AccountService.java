@@ -31,7 +31,7 @@ public interface AccountService {
     long getCurrentBalance(long accountId) throws NoSuchAccountException;
 
     /**
-     * Withdraws money from given acount
+     * Withdraws money from given account
      * @param accountId Account which will be withdrawn from
      * @param amount Amount of money to be withrdawn
      * @throws NoSuchAccountException Thrown when no such account exists

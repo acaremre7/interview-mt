@@ -17,8 +17,8 @@ public class AccountWebResource {
     }
 
     @GET
-    @Path("/balance/{id}")
-    public Response getBalance(@PathParam("id") String id){
+    @Path("/{id}")
+    public Response getAccount(@PathParam("id") String id){
         return null;
     }
 }

@@ -1,9 +1,9 @@
 package exception;
 
-public class InsufficientBalanceException extends Exception{
-    private static final String INSUFFICIENT_BALANCE = "Cannot process transaction: Insufficient balance in account id: ";
+import common.ApplicationConstants;
 
+public class InsufficientBalanceException extends Exception{
     public InsufficientBalanceException(long accountId){
-        super(INSUFFICIENT_BALANCE + accountId);
+        super(ApplicationConstants.INSUFFICIENT_BALANCE + accountId);
     }
 }
