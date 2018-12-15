@@ -1,3 +1,5 @@
+package service;
+
 import exception.DuplicateAccountIdException;
 import exception.InsufficientBalanceException;
 import exception.NoSuchAccountException;
