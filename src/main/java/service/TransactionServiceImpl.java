@@ -21,6 +21,7 @@ public class TransactionServiceImpl implements TransactionService {
         return instance;
     }
 
+    @Override
     public void processTransaction(Transaction transaction) throws NoSuchAccountException, InsufficientBalanceException {
 
     }

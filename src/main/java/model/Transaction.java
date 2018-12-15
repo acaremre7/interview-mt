@@ -2,12 +2,12 @@ package model;
 
 public class Transaction {
     private Account sender;
-    private Account receiver;
+    private Account recipient;
     private double amount;
 
-    public Transaction(Account sender, Account receiver, double amount) {
+    public Transaction(Account sender, Account recipient, double amount) {
         this.sender = sender;
-        this.receiver = receiver;
+        this.recipient = recipient;
         this.amount = amount;
     }
 
@@ -15,8 +15,8 @@ public class Transaction {
         return sender;
     }
 
-    public Account getReceiver() {
-        return receiver;
+    public Account getRecipient() {
+        return recipient;
     }
 
     public double getAmount(){return amount;}

@@ -38,4 +38,12 @@ public interface AccountDao {
      * @throws NoSuchAccountException Thrown when no such account exists
      */
     void deposit(long accountId, double amount) throws NoSuchAccountException;
+
+    /**
+     * Returns current balance of given account id
+     * @param accountId Requested account
+     * @return Balance of that account
+     * @throws NoSuchAccountException Thrown when no such account exists
+     */
+    double getCurrentBalance(long accountId) throws NoSuchAccountException;
 }
