@@ -16,6 +16,14 @@ public interface AccountDao {
     Account createAccount(long accountId, double initialBalance) throws DuplicateAccountIdException;
 
     /**
+     * Returns account for the given ID
+     * @param accountId Requested account's ID
+     * @return Requested account
+     * @throws NoSuchAccountException Thrown when no such account exists
+     */
+    Account getAccount(long accountId) throws NoSuchAccountException;
+
+    /**
      * Withdraws money from given account
      * @param accountId Account which will be withdrawn from
      * @param amount Amount of money to be withrdawn

@@ -1,7 +1,5 @@
 package model;
 
-import java.util.Objects;
-
 public class Account {
     private long accountId;
     private double balance;
@@ -35,11 +33,5 @@ public class Account {
         Account account = (Account) o;
         return accountId == account.accountId &&
                 Double.compare(account.balance, balance) == 0;
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(accountId, balance);
     }
 }

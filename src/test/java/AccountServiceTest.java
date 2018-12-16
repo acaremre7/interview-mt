@@ -1,6 +1,7 @@
 import exception.DuplicateAccountIdException;
 import exception.InsufficientBalanceException;
 import exception.NoSuchAccountException;
+import model.Account;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -20,6 +21,28 @@ public class AccountServiceTest {
     @AfterClass
     public static void tearDown(){
         accountService = null;
+    }
+
+    @Test
+    public void testCreateAndGetAccount() throws DuplicateAccountIdException, NoSuchAccountException {
+        long accountId = 5L;
+        double initialBalance = 1000D;
+        Account account = accountService.createAccount(accountId,initialBalance);
+        Assert.assertEquals(account,accountService.getAccount(accountId));
+    }
+
+    @Test
+    public void testCreateAccount_DuplicateAccountIdException() throws DuplicateAccountIdException{
+        long accountId = 6L;
+        double initialBalance = 1000D;
+        accountService.createAccount(accountId,initialBalance);
+        Assert.assertThrows(DuplicateAccountIdException.class, () -> accountService.createAccount(accountId,initialBalance));
+    }
+
+    @Test
+    public void testGetAccount_NoSuchAccountException(){
+        long accountId = 14L;
+        Assert.assertThrows(NoSuchAccountException.class, () -> accountService.getAccount(accountId));
     }
 
     @Test

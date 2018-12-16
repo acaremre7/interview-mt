@@ -3,6 +3,7 @@ import dao.AccountDaoImpl;
 import exception.DuplicateAccountIdException;
 import exception.InsufficientBalanceException;
 import exception.NoSuchAccountException;
+import model.Account;
 import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -23,11 +24,11 @@ public class AccountDaoTest {
     }
 
     @Test
-    public void testCreateAccount() throws DuplicateAccountIdException, NoSuchAccountException {
+    public void testCreateAndGetAccount() throws DuplicateAccountIdException, NoSuchAccountException {
         long accountId = 7L;
         double balance = 1000D;
-        accountDao.createAccount(accountId,balance);
-        Assert.assertEquals(balance,accountDao.getCurrentBalance(accountId),0);
+        Account account = accountDao.createAccount(accountId,balance);
+        Assert.assertEquals(account,accountDao.getAccount(accountId));
     }
 
     @Test
@@ -35,6 +36,12 @@ public class AccountDaoTest {
         long accountId = 8L;
         accountDao.createAccount(accountId,0D);
         Assert.assertThrows(DuplicateAccountIdException.class, () -> accountDao.createAccount(accountId,0D));
+    }
+
+    @Test
+    public void testGetAccount_NoSuchAccountException(){
+        long accountId = 17L;
+        Assert.assertThrows(NoSuchAccountException.class, () -> accountDao.getAccount(accountId));
     }
 
     @Test
@@ -79,4 +86,19 @@ public class AccountDaoTest {
         double depositedAmount = 200D;
         Assert.assertThrows(NoSuchAccountException.class, () -> accountDao.deposit(accountId,depositedAmount));
     }
+
+    @Test
+    public void testGetCurrentBalance() throws DuplicateAccountIdException, NoSuchAccountException {
+        long accountId = 20L;
+        double initialBalance = 1000D;
+        accountDao.createAccount(accountId,initialBalance);
+        Assert.assertEquals(initialBalance,accountDao.getCurrentBalance(accountId),0);
+    }
+
+    @Test
+    public void testGetCurrentBalance_NoSuchAccountException(){
+        long accountId = 21L;
+        Assert.assertThrows(NoSuchAccountException.class, () -> accountDao.getCurrentBalance(accountId));
+    }
+
 }

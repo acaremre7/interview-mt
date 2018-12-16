@@ -31,6 +31,11 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
+    public Account getAccount(long accountId) throws NoSuchAccountException {
+        return accountDao.getAccount(accountId);
+    }
+
+    @Override
     public double getCurrentBalance(long accountId) throws NoSuchAccountException {
         return accountDao.getCurrentBalance(accountId);
     }

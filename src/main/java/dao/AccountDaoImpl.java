@@ -36,10 +36,19 @@ public class AccountDaoImpl implements AccountDao {
                     throw new DuplicateAccountIdException(accountId);
                 }else{
                     Account account = new Account(accountId,initialBalance);
-                    accountMap.put(accountId,new Account(accountId,initialBalance));
+                    accountMap.put(accountId,account);
                     return account;
                 }
             }
+        }
+    }
+
+    @Override
+    public Account getAccount(long accountId) throws NoSuchAccountException {
+        if(accountMap.containsKey(accountId)) {
+            return accountMap.get(accountId);
+        }else {
+            throw new NoSuchAccountException(accountId);
         }
     }
 

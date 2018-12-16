@@ -16,6 +16,14 @@ public interface AccountService {
     Account createAccount(long accountId, double initialBalance) throws DuplicateAccountIdException;
 
     /**
+     * Returns account for the given ID
+     * @param accountId Requested account's ID
+     * @return Requested account
+     * @throws NoSuchAccountException Thrown when no such account exists
+     */
+    Account getAccount(long accountId) throws NoSuchAccountException;
+
+    /**
      * Returns current balance of given account id
      * @param accountId Requested account
      * @return Balance of that account
