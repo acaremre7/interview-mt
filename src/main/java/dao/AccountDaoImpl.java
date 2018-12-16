@@ -11,7 +11,7 @@ public class AccountDaoImpl implements AccountDao {
 
     private static AccountDaoImpl instance;
     private ConcurrentHashMap<Long,Account> accountMap = new ConcurrentHashMap<>();
-    private static final Object createAccountLock = new Object();
+    private static final Object newAccountLock = new Object();
 
     private AccountDaoImpl(){}
 
@@ -31,7 +31,7 @@ public class AccountDaoImpl implements AccountDao {
         if(accountMap.containsKey(accountId)){
             throw new DuplicateAccountIdException(accountId);
         }else {
-            synchronized (createAccountLock) {
+            synchronized (newAccountLock) {
                 if(accountMap.containsKey(accountId)){
                     throw new DuplicateAccountIdException(accountId);
                 }else{
@@ -50,7 +50,7 @@ public class AccountDaoImpl implements AccountDao {
         }else if(amount > accountMap.get(accountId).getBalance()){
             throw new InsufficientBalanceException(accountId);
         }else{
-            synchronized (accountMap.get(accountId)){
+            synchronized (accountMap.get(accountId).getLock()){
                 if(amount > accountMap.get(accountId).getBalance()){
                     throw new InsufficientBalanceException(accountId);
                 }else{
@@ -67,7 +67,7 @@ public class AccountDaoImpl implements AccountDao {
         if(!accountMap.containsKey(accountId)){
             throw new NoSuchAccountException(accountId);
         }else {
-            synchronized (accountMap.get(accountId)){
+            synchronized (accountMap.get(accountId).getLock()){
                 Account account = accountMap.get(accountId);
                 account.setBalance(account.getBalance() + amount);
                 accountMap.put(accountId,account);

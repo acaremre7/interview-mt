@@ -5,11 +5,7 @@ import java.util.Objects;
 public class Account {
     private long accountId;
     private double balance;
-
-    public Account(long accountId) {
-        this.accountId = accountId;
-        this.balance = 0;
-    }
+    private final Object lock = new Object();
 
     public Account(long accountId, double initialBalance) {
         this.accountId = accountId;
@@ -26,6 +22,10 @@ public class Account {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public Object getLock() {
+        return lock;
     }
 
     @Override
