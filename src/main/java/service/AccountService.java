@@ -8,13 +8,6 @@ import model.Account;
 public interface AccountService {
 
     /**
-     *  Creates an account with the given account id with an initial balance of 0
-     * @param accountId AccountId for the new account
-     * @throws DuplicateAccountIdException Thrown when account id already exists in memory
-     */
-    Account createAccount(long accountId) throws DuplicateAccountIdException;
-
-    /**
      * Creates an account with the given account id and the given initial balance
      * @param accountId  AccountId for the new account
      * @param initialBalance Initial balance for the new account

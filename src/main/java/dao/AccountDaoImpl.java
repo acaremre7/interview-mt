@@ -22,11 +22,6 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public Account createAccount(long accountId) {
-        return null;
-    }
-
-    @Override
     public Account createAccount(long accountId, double initialBalance) {
         return null;
     }
