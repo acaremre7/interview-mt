@@ -31,7 +31,7 @@ public class AccountDaoTest {
     }
 
     @Test
-    public void testCreateAccount_DuplicateAccountIdException() throws DuplicateAccountIdException, NoSuchAccountException {
+    public void testCreateAccount_DuplicateAccountIdException() throws DuplicateAccountIdException {
         long accountId = 8L;
         accountDao.createAccount(accountId,0D);
         Assert.assertThrows(DuplicateAccountIdException.class, () -> accountDao.createAccount(accountId,0D));
