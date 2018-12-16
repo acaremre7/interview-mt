@@ -10,5 +10,7 @@ public class ApplicationConstants {
     public static final String NO_SUCH_ACCOUNT = "No such account matching with the account id: ";
     public static final String NEGATIVE_INITIAL_AMOUNT = "Initial balance cannot be negative.";
     public static final String INVALID_ID = "Invalid ID: ";
+    public static final String NULL_OR_EMPTY_ID = "null or empty ID";
+    public static final String NULL_OR_EMPTY_AMOUNT = "null or empty amount";
     public static final String INVALID_TRANSFER_AMOUNT = "Invalid transfer amount";
 }
