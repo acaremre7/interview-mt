@@ -58,7 +58,7 @@ public class AccountWebResourceTest {
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
         Assert.assertEquals(HttpStatus.SC_BAD_REQUEST,response.getStatusLine().getStatusCode());
-        Assert.assertEquals(ApplicationConstants.NEGATIVE_INITIAL_AMOUNT,EntityUtils.toString(response.getEntity()));
+        Assert.assertEquals(ApplicationConstants.NEGATIVE_INITIAL_BALANCE,EntityUtils.toString(response.getEntity()));
     }
 
     @Test
@@ -104,7 +104,7 @@ public class AccountWebResourceTest {
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
 
         Assert.assertEquals(HttpStatus.SC_BAD_REQUEST,response.getStatusLine().getStatusCode());
-        Assert.assertEquals(ApplicationConstants.NEGATIVE_INITIAL_AMOUNT + accountId.toString(),EntityUtils.toString(response.getEntity()));
+        Assert.assertEquals(ApplicationConstants.NO_SUCH_ACCOUNT + accountId.toString(),EntityUtils.toString(response.getEntity()));
     }
 
 

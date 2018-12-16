@@ -94,7 +94,7 @@ public class TransactionWebResourceTest {
                 "&amount=" + transferAmount.toString());
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
         Assert.assertEquals(HttpStatus.SC_BAD_REQUEST,response.getStatusLine().getStatusCode());
-        Assert.assertEquals(ApplicationConstants.INVALID_TRANSFER_AMOUNT,EntityUtils.toString(response.getEntity()));
+        Assert.assertEquals(ApplicationConstants.NEGATIVE_TRANSFER_AMOUNT,EntityUtils.toString(response.getEntity()));
     }
 
     @Test
@@ -112,7 +112,7 @@ public class TransactionWebResourceTest {
                 "&amount=" + transferAmount.toString());
         HttpResponse response = HttpClientBuilder.create().build().execute(request);
         Assert.assertEquals(HttpStatus.SC_BAD_REQUEST,response.getStatusLine().getStatusCode());
-        Assert.assertEquals(ApplicationConstants.NO_SUCH_ACCOUNT,EntityUtils.toString(response.getEntity()));
+        Assert.assertEquals(ApplicationConstants.NEGATIVE_TRANSFER_AMOUNT,EntityUtils.toString(response.getEntity()));
     }
 
     @Test
