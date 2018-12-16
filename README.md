@@ -1,6 +1,12 @@
 # ea-money_transfer
 Backend test for Revolut
 
+Please refer /documentation/wadl-report.html for web service documentation.
+
+
+
+Test Description:
+
 Design and implement a RESTful API (including data model and the backing implementation)
 for money transfers between accounts.
 Explicit requirements:
