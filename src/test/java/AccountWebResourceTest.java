@@ -72,6 +72,15 @@ public class AccountWebResourceTest {
     }
 
     @Test
+    public void testCreateAccount_InvalidID_2() throws IOException {
+        HttpUriRequest request = new HttpPost(ApplicationConstants.ACCOUNT_OPERATIONS_PATH + "create");
+        HttpResponse response = HttpClientBuilder.create().build().execute(request);
+
+        Assert.assertEquals(HttpStatus.SC_BAD_REQUEST,response.getStatusLine().getStatusCode());
+        Assert.assertEquals(ApplicationConstants.INVALID_ID + ApplicationConstants.NULL_OR_EMPTY_ID,EntityUtils.toString(response.getEntity()));
+    }
+
+    @Test
     public void testGetAccount() throws IOException {
         Long accountId = 17L;
         Double initialAmount = 1000D;

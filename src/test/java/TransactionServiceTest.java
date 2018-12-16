@@ -70,7 +70,7 @@ public class TransactionServiceTest {
 
     @Test
     public void testProcessTransaction_InsufficientBalanceException() throws DuplicateAccountIdException, NoSuchAccountException {
-        long senderAccountId = 2005L;
+        long senderAccountId = 2007L;
         long recipientAccountId = 2006L;
         double initialBalance = 1000D;
         double transactionAmount = 2000D;

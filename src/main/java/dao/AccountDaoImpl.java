@@ -59,14 +59,12 @@ public class AccountDaoImpl implements AccountDao {
         }else if(amount > accountMap.get(accountId).getBalance()){
             throw new InsufficientBalanceException(accountId);
         }else{
-            synchronized (accountMap.get(accountId).getLock()){
-                if(amount > accountMap.get(accountId).getBalance()){
-                    throw new InsufficientBalanceException(accountId);
-                }else{
-                    Account account = accountMap.get(accountId);
-                    account.setBalance(account.getBalance() - amount);
-                    accountMap.put(accountId,account);
-                }
+            if(amount > accountMap.get(accountId).getBalance()){
+                throw new InsufficientBalanceException(accountId);
+            }else{
+                Account account = accountMap.get(accountId);
+                account.setBalance(account.getBalance() - amount);
+                accountMap.put(accountId,account);
             }
         }
     }
@@ -76,11 +74,9 @@ public class AccountDaoImpl implements AccountDao {
         if(!accountMap.containsKey(accountId)){
             throw new NoSuchAccountException(accountId);
         }else {
-            synchronized (accountMap.get(accountId).getLock()){
-                Account account = accountMap.get(accountId);
-                account.setBalance(account.getBalance() + amount);
-                accountMap.put(accountId,account);
-            }
+            Account account = accountMap.get(accountId);
+            account.setBalance(account.getBalance() + amount);
+            accountMap.put(accountId,account);
         }
     }
 
