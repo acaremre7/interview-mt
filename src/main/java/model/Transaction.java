@@ -11,11 +11,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public long getSender() {
+    public long getSenderId() {
         return senderId;
     }
 
-    public long getRecipient() {
+    public long getRecipientId() {
         return recipientId;
     }
 
