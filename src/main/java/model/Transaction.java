@@ -1,22 +1,22 @@
 package model;
 
 public class Transaction {
-    private Account sender;
-    private Account recipient;
+    private long senderId;
+    private long recipientId;
     private double amount;
 
-    public Transaction(Account sender, Account recipient, double amount) {
-        this.sender = sender;
-        this.recipient = recipient;
+    public Transaction(long sender, long recipient, double amount) {
+        this.senderId = sender;
+        this.recipientId = recipient;
         this.amount = amount;
     }
 
-    public Account getSender() {
-        return sender;
+    public long getSender() {
+        return senderId;
     }
 
-    public Account getRecipient() {
-        return recipient;
+    public long getRecipient() {
+        return recipientId;
     }
 
     public double getAmount(){return amount;}

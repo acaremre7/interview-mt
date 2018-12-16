@@ -32,42 +32,52 @@ public class TransactionServiceTest {
 
     @Test
     public void testProcessTransaction() throws InsufficientBalanceException, NoSuchAccountException, DuplicateAccountIdException {
+        long senderAccountId = 2000L;
+        long recipientAccountId = 2001L;
         double initialBalance = 1000D;
         double transactionAmount = 500D;
 
-        senderAccount = accountService.createAccount(2000L,initialBalance);
-        recipientAccount = accountService.createAccount(2001L,initialBalance);
-        Transaction transaction = new Transaction(senderAccount, recipientAccount,transactionAmount);
+        accountService.createAccount(senderAccountId,initialBalance);
+        accountService.createAccount(recipientAccountId,initialBalance);
+        Transaction transaction = new Transaction(senderAccountId, recipientAccountId,transactionAmount);
 
         transactionService.processTransaction(transaction);
-        Assert.assertEquals((initialBalance-transactionAmount),senderAccount.getBalance(),0);
-        Assert.assertEquals((initialBalance+transactionAmount), recipientAccount.getBalance(),0);
+        Assert.assertEquals((initialBalance-transactionAmount),accountService.getCurrentBalance(senderAccountId),0);
+        Assert.assertEquals((initialBalance+transactionAmount),accountService.getCurrentBalance(recipientAccountId),0);
     }
 
     @Test
     public void testProcessTransaction_NoSuchAccountException_1() throws DuplicateAccountIdException {
-        senderAccount = accountService.createAccount(2002L,1000D);
-        recipientAccount = new Account(2003L,1000D);
-        Transaction transaction = new Transaction(senderAccount, recipientAccount,500D);
+        long senderAccountId = 2002L;
+        long recipientAccountId = 2003L;
+
+        accountService.createAccount(senderAccountId,1000D);
+
+        Transaction transaction = new Transaction(senderAccountId, recipientAccountId,500D);
         Assert.assertThrows(NoSuchAccountException.class, () -> transactionService.processTransaction(transaction));
     }
 
     @Test
     public void testProcessTransaction_NoSuchAccountException_2() throws DuplicateAccountIdException {
-        senderAccount = new Account(2004L,1000D);
-        recipientAccount = accountService.createAccount(2005L,1000D);
-        Transaction transaction = new Transaction(senderAccount, recipientAccount,500D);
+        long senderAccountId = 2004L;
+        long recipientAccountId = 2005L;
+
+        accountService.createAccount(recipientAccountId,1000D);
+
+        Transaction transaction = new Transaction(senderAccountId, recipientAccountId,500D);
         Assert.assertThrows(NoSuchAccountException.class, () -> transactionService.processTransaction(transaction));
     }
 
     @Test
     public void testProcessTransaction_InsufficientBalanceException() throws DuplicateAccountIdException, NoSuchAccountException {
+        long senderAccountId = 2005L;
+        long recipientAccountId = 2006L;
         double initialBalance = 1000D;
         double transactionAmount = 2000D;
 
-        senderAccount = accountService.createAccount(2005L,initialBalance);
-        recipientAccount = accountService.createAccount(2006L,initialBalance);
-        Transaction transaction = new Transaction(senderAccount, recipientAccount,transactionAmount);
+        senderAccount = accountService.createAccount(senderAccountId,initialBalance);
+        recipientAccount = accountService.createAccount(recipientAccountId,initialBalance);
+        Transaction transaction = new Transaction(senderAccountId, recipientAccountId,transactionAmount);
         Assert.assertThrows(InsufficientBalanceException.class, () -> transactionService.processTransaction(transaction));
     }
 }
