@@ -1,5 +1,8 @@
 package service;
 
+import dao.AccountDao;
+import dao.AccountDaoImpl;
+import exception.DuplicateAccountIdException;
 import exception.InsufficientBalanceException;
 import exception.NoSuchAccountException;
 import model.Account;
@@ -7,6 +10,7 @@ import model.Account;
 public class AccountServiceImpl implements AccountService {
 
     private static AccountServiceImpl instance;
+    private AccountDao accountDao = AccountDaoImpl.getInstance();
 
     private AccountServiceImpl(){}
 
@@ -22,22 +26,22 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public Account createAccount(long accountId, double initialBalance) {
-        return null;
+    public Account createAccount(long accountId, double initialBalance) throws DuplicateAccountIdException {
+        return accountDao.createAccount(accountId,initialBalance);
     }
 
     @Override
-    public long getCurrentBalance(long accountId) throws NoSuchAccountException {
-        return 0;
+    public double getCurrentBalance(long accountId) throws NoSuchAccountException {
+        return accountDao.getCurrentBalance(accountId);
     }
 
     @Override
     public void withdraw(long accountId, double amount) throws NoSuchAccountException, InsufficientBalanceException {
-
+        accountDao.withdraw(accountId,amount);
     }
 
     @Override
     public void deposit(long accountId, double amount) throws NoSuchAccountException {
-
+        accountDao.deposit(accountId,amount);
     }
 }

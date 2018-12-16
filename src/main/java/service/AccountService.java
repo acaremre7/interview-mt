@@ -21,7 +21,7 @@ public interface AccountService {
      * @return Balance of that account
      * @throws NoSuchAccountException Thrown when no such account exists
      */
-    long getCurrentBalance(long accountId) throws NoSuchAccountException;
+    double getCurrentBalance(long accountId) throws NoSuchAccountException;
 
     /**
      * Withdraws money from given account
