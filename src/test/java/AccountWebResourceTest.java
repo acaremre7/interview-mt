@@ -8,28 +8,22 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 import java.io.IOException;
 
 public class AccountWebResourceTest {
     private static Gson gson;
 
+    @ClassRule
+    public static final ServerExternalResource externalResource = new ServerExternalResource();
+
     @BeforeClass
     public static void setUp() throws Exception {
-        Main.initServer();
-        Main.server.start();
         gson  = new Gson();
     }
     @AfterClass
     public static void tearDown() throws Exception {
-        if(Main.server.isRunning()) {
-            Main.server.stop();
-            Main.server.destroy();
-        }
         gson = null;
     }
 

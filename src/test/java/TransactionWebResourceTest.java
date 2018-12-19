@@ -7,10 +7,7 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
-import org.junit.AfterClass;
-import org.junit.Assert;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 import service.AccountService;
 import service.AccountServiceImpl;
 
@@ -20,18 +17,15 @@ public class TransactionWebResourceTest {
 
     private static AccountService accountService;
 
+    @ClassRule
+    public static final ServerExternalResource externalResource = new ServerExternalResource();
+
     @BeforeClass
     public static void setUp() throws Exception {
-        Main.initServer();
-        Main.server.start();
         accountService = AccountServiceImpl.getInstance();
     }
     @AfterClass
     public static void tearDown() throws Exception {
-        if(Main.server.isRunning()) {
-            Main.server.stop();
-            Main.server.destroy();
-        }
         accountService = null;
     }
 
@@ -39,7 +33,7 @@ public class TransactionWebResourceTest {
     public void testTransaction() throws IOException, DuplicateAccountIdException, NoSuchAccountException {
         Long accountId1 = 19L;
         Double initialAmount1 = 1000D;
-        Long accountId2 = 20L;
+        Long accountId2 = 28L;
         Double initialAmount2 = 1000D;
         Double transferAmount = 500D;
 
